@@ -7,7 +7,7 @@ public with sharing class OpportunityHandler extends TriggerHandler {
     public override void beforeUpdate() {
     OpportunityHelper.stageDescriptionUpdate((Map<Id,Opportunity>)Trigger.oldMap, Trigger.new);
     OpportunityHelper.amountValidation(Trigger.new);
-    handlerOpportunity.updatePrimaryContact(Trigger.new);
+    OpportunityHelper.updatePrimaryContact(Trigger.new);
     }
 
     public override void beforeDelete() {
