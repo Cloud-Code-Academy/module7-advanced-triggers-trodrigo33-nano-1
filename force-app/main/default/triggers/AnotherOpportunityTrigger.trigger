@@ -149,25 +149,3 @@ trigger AnotherOpportunityTrigger on Opportunity (before insert, after insert, b
         }
     }
 }
-
-
-        /*
-        // ISSUE - REMOVED ENTIRE CODE BLOCK AS this is an attempt to update the list of opportunity records in an after update context. 
-        //ISSUE - AFTER UPDATE Nested for loop; LOOP through each new opp. FOR EACH new opp, LOOP through each old opp. FOR EACH old opp, if stage name is null, set description.
-        //ISSUE - AFTER UPDATE - can't update record that is already committed to database. 
-        //ISSUE - Looks like trying to compare prior stage name with new stage name. This for loop does not work to do that. Must update.
-        else if (Trigger.isUpdate){
-            // Append Stage changes in Opportunity Description
-            Map<Id, Opportunity> oldOpps = new Map<Id, Opportunity>(Trigger.oldMap);
-            for (Opportunity opp : Trigger.new){
-                {Opportunity oldOpp = oldOpps.get(opp.Id);
-                    if (opp.StageName != oldOpp.StageName){
-                        opp.Description += '\n Stage Change:' + opp.StageName + ':' + DateTime.now().format();
-                    }
-                }                
-            }
-            //REMOVED TO AVOID RECURSION. Changes have already been committed after update. Trigger.new is read only.
-            // If needing to update the triggering record, this would be best placed in a before update context.
-            //update Trigger.new;
-        }
-             */
