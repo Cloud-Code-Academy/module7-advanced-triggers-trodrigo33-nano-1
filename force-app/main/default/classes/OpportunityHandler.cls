@@ -12,7 +12,6 @@ public with sharing class OpportunityHandler extends TriggerHandler {
 
     public override void beforeDelete() {
     OpportunityHelper.preventDeletion(Trigger.old);
-    OpportunityHelper.preventClosedOppDeletion(Trigger.old);
     }
 
     public override void afterInsert(){

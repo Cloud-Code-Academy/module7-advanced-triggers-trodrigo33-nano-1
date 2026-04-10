@@ -63,14 +63,6 @@ public with sharing class OpportunityHelper {
         }
     }
 
-    public static void preventClosedOppDeletion (List <Opportunity> oldOpportunities){
-            for (Opportunity oldOpp : oldOpportunities){
-                if (oldOpp.IsClosed) {
-                    oldOpp.addError('Cannot delete closed opportunity');
-                }
-            }
-    }
-
     //Helper Method to return accountIdSet.
     public static Set<Id> accountIdSet (List <Opportunity> Opportunities){
         Set<Id> accountIds = new Set<Id>();
