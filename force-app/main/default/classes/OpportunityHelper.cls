@@ -22,6 +22,9 @@ public with sharing class OpportunityHelper {
     //Validates amount on opportunity to be greater than 5000
      public static void amountValidation (List <Opportunity> newOpportunities) {
         for (Opportunity newOpp : newOpportunities ) {
+            if (newOpp.Amount == null){
+                continue;
+            }
             if (newOpp.Amount <= 5000) {
                 newOpp.Amount.addError('Opportunity amount must be greater than 5000');
             }
@@ -150,11 +153,11 @@ public with sharing class OpportunityHelper {
             }
         }
 
-        Contact primaryContact = [SELECT Id, AccountId FROM Contact WHERE Title = 'VP Sales' AND AccountId IN :accIds LIMIT 1];
+        Contact primaryContact = [SELECT Id, AccountId FROM Contact WHERE Title = 'VP Sales' AND AccountId IN :accIds];
         List<Opportunity> newopps = new List<Opportunity>();
 
         for (Opportunity opp : oppNewMap.values()){            
-            if (opp.Primary_Contact__c == null){
+            if (opp.Primary_Contact__c == null && accIds.contains(opp.AccountId)){
                 Opportunity oppToUpdate = new Opportunity(Id = opp.Id);
                 oppToUpdate.Primary_Contact__c = primaryContact.Id;
                 newopps.add(oppToUpdate);
